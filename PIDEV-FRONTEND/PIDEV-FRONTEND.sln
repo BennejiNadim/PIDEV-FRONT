@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29215.179
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PIDEV-FRONTEND", "PIDEV-FRONTEND\PIDEV-FRONTEND.csproj", "{7E04CF95-1E16-4C93-99F2-AC2C6527A020}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7E04CF95-1E16-4C93-99F2-AC2C6527A020}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E04CF95-1E16-4C93-99F2-AC2C6527A020}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E04CF95-1E16-4C93-99F2-AC2C6527A020}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E04CF95-1E16-4C93-99F2-AC2C6527A020}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9904F543-1C1E-45C6-9833-1DBAB144D333}
+	EndGlobalSection
+EndGlobal

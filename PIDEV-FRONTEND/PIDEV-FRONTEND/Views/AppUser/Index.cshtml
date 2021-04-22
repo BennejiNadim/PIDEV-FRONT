@@ -1,0 +1,36 @@
+﻿
+
+@{
+    ViewBag.Title = "Index";
+}
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+</head>
+<body>
+    <a href="@Url.Action("Create","AppUser")">add new user</a>
+    <table cellpadding="2" cellspacing="2" border="1">
+        <tr>
+            <th>id</th>
+            <th>email</th>
+            <th>password</th>
+            <th>firstName</th>
+            <th>lastName</th>
+        </tr>
+        @foreach (var p in ViewBag.result)
+        {
+    <tr>
+        <th>@p.userId</th>
+        <th>@p.email</th>
+        <th>@p.password</th>
+        <th>@p.firstName</th>
+        <th>@p.lastName</th>
+    </tr>
+        }
+
+    </table>
+</body>
+</html>
+
+
