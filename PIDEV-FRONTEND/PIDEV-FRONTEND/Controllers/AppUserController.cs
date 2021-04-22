@@ -1,6 +1,7 @@
 ﻿using PIDEV_FRONTEND.Models;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Net.Http;
@@ -27,7 +28,7 @@ namespace PIDEV_FRONTEND.Controllers
             {
                 ViewBag.result = "error";
             }
-            return View();
+            return View("home");
         }
 
         // GET: AppUser/Details/5
@@ -54,7 +55,7 @@ namespace PIDEV_FRONTEND.Controllers
             user.lastName = lastName;
             user.password = password;
             client.PostAsJsonAsync<AppUser>("registerApi/Signup", user).ContinueWith((postTask) => postTask.Result.EnsureSuccessStatusCode());
-            return View("Index");
+            return View("home");
         }
 
         // GET: AppUser/Edit/5
@@ -127,9 +128,9 @@ namespace PIDEV_FRONTEND.Controllers
             else {
                 invalidCredentials = "Invalid Credentials";
                 ViewBag.err = invalidCredentials;
-                return View("Login");
+                return View("home");
             }
-            return View("Login");
+            return View("home");
         }
         public ActionResult Logout()
         {
@@ -139,7 +140,45 @@ namespace PIDEV_FRONTEND.Controllers
                 HttpContext.Response.SetCookie(Request.Cookies["Token"]);
             }
                 
-            return View("Login");
+            return View("home");
+        }
+        public ActionResult addPropertyView()
+        {
+            return View();
+        }
+        public ActionResult home()
+        {
+            return View();
+        }
+        public async System.Threading.Tasks.Task<ActionResult> AddAnnouncementAsync(string estateType,string location,double price)
+        {
+            Announcement ann = new Announcement();
+            ann.estateType = estateType;
+            ann.location = location;
+            ann.price = price;
+            HttpClient client = new HttpClient();
+            client.BaseAddress = new Uri("http://localhost:8081");
+            string jwtEncodedString = Request.Cookies["Token"].Value;
+            Debug.WriteLine(jwtEncodedString);
+            // var token = new JwtSecurityToken(jwtEncodedString: jwtEncodedString);
+
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer",jwtEncodedString);
+            HttpResponseMessage response = await client.PostAsJsonAsync<Announcement>("apiHF/addAnnounce", ann).ContinueWith((postTask) => postTask.Result);
+            if (response.IsSuccessStatusCode)
+            {
+                ViewBag.status = response.StatusCode;
+                ViewBag.auth = client.DefaultRequestHeaders.Authorization;
+            }
+            else {
+                ViewBag.status = response.StatusCode;
+                ViewBag.auth = client.DefaultRequestHeaders.Authorization;
+                Debug.WriteLine(response.ToString());
+                Debug.WriteLine(client.DefaultRequestHeaders.Authorization);
+                Debug.WriteLine(location);
+                Debug.WriteLine(estateType);
+                Debug.WriteLine(price);
+            }
+            return View("home");
         }
     }
 }
