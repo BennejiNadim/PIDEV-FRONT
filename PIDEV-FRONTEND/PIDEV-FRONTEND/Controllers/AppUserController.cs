@@ -108,16 +108,27 @@ namespace PIDEV_FRONTEND.Controllers
             LoginForm log = new LoginForm();
             log.email = email;
             log.password = password;
-            HttpResponseMessage response = await client.PostAsJsonAsync<LoginForm>("login", log).ContinueWith((postTask) => postTask.Result.EnsureSuccessStatusCode());
-            var jwtEncodedString = response.Headers.GetValues("Authorization").First();
-            var token = new JwtSecurityToken(jwtEncodedString: jwtEncodedString);
-            string jemail = token.Claims.First(c => c.Type == "sub").Value;
-            string roles = token.Claims.First(c => c.Type == "roles").Value;
-            HttpCookie userCookie = new HttpCookie("Token", jwtEncodedString);
-            userCookie.Expires.AddDays(10);
-            HttpContext.Response.SetCookie(userCookie);
-            HttpCookie newCookie = Request.Cookies["Token"];
-            Console.WriteLine(newCookie.Value);
+            String invalidCredentials="";
+
+            HttpResponseMessage response = await client.PostAsJsonAsync<LoginForm>("login", log).ContinueWith((postTask) => postTask.Result);
+            if (response.IsSuccessStatusCode)
+            {
+                var jwtEncodedString = response.Headers.GetValues("Authorization").First();
+                var token = new JwtSecurityToken(jwtEncodedString: jwtEncodedString);
+                string jemail = token.Claims.First(c => c.Type == "sub").Value;
+                string roles = token.Claims.First(c => c.Type == "roles").Value;
+                HttpCookie userCookie = new HttpCookie("Token", jwtEncodedString);
+                userCookie.Expires.AddDays(10);
+                HttpContext.Response.SetCookie(userCookie);
+                HttpCookie newCookie = Request.Cookies["Token"];
+                Console.WriteLine(newCookie.Value);
+
+            }
+            else {
+                invalidCredentials = "Invalid Credentials";
+                ViewBag.err = invalidCredentials;
+                return View("Login");
+            }
             return View("Login");
         }
         public ActionResult Logout()
