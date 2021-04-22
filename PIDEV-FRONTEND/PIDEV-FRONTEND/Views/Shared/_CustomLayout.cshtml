@@ -108,7 +108,7 @@
                                         </ul>
                                     </li>
                                     <li>
-                                        <a href="JavaScript:Void(0);">My Account<span class="submenu-indicator"></span></a>
+                                        <a href="JavaScript:Void(0);">My <span class="submenu-indicator"></span></a>
                                         <ul class="nav-dropdown nav-submenu">
                                             <li><a href="dashboard.html">User Dashboard</a></li>
                                             <li><a href="payment.html">Payment Confirmation</a></li>
@@ -144,12 +144,26 @@
                         </ul>
 
                         <ul class="nav-menu nav-menu-social align-to-right">
+                            @if (Context.Request.Cookies["Token"] == null)
+                            {
+                                <li>
+                                    <a href="JavaScript:Void(0);" data-bs-toggle="modal" data-bs-target="#login" class="text-success">
+                                        <i class="fas fa-user-circle mr-2"></i>Signin
+                                    </a>
+                                </li>
+                            }
+                            else
+                            {
+    
+                                {
+                                    <li>
+                                        <a href="~/AppUser/Logout"  data-bs-target="#" class="text-success">
+                                            <i class="fas fa-user-circle mr-2"></i>Logout
+                                        </a>
+                                    </li>
+                                }
 
-                            <li>
-                                <a href="JavaScript:Void(0);" data-bs-toggle="modal" data-bs-target="#login" class="text-success">
-                                    <i class="fas fa-user-circle mr-2"></i>Signin
-                                </a>
-                            </li>
+                            }
                             <li class="add-listing theme-bg">
                                 <a href="submit-property.html">Add Property</a>
                             </li>
@@ -482,54 +496,58 @@
         </footer>
         <!-- ============================ Footer End ================================== -->
         <!-- Log In Modal -->
-        @using (Html.BeginForm("LoginAsync", "AppUser"))
-        {
-            <div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="registermodal" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered login-pop-form" role="document">
-                    <div class="modal-content" id="registermodal">
-                        <span class="mod-close" data-bs-dismiss="modal" aria-hidden="true"><i class="ti-close"></i></span>
-                        <div class="modal-body">
-                            <h4 class="modal-header-title">Log In</h4>
-                            <div class="login-form">
-                                <form>
+     
+            @using (Html.BeginForm("LoginAsync", "AppUser"))
+            {
+                <div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="registermodal" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered login-pop-form" role="document">
+                        <div class="modal-content" id="registermodal">
+                            <span class="mod-close" data-bs-dismiss="modal" aria-hidden="true"><i class="ti-close"></i></span>
+                            <div class="modal-body">
+                                <h4 class="modal-header-title">Log In</h4>
+                                <div class="login-form">
+                                    <form>
 
-                                    <div class="form-group">
-                                        <label>User Name</label>
-                                        <div class="input-with-icon">
-                                            <input type="text" class="form-control" placeholder="email" name="email">
-                                            <i class="ti-user"></i>
+                                        <div class="form-group">
+                                            <label>User Name</label>
+                                            <div class="input-with-icon">
+                                                <input type="text" class="form-control" placeholder="email" name="email">
+                                                <i class="ti-user"></i>
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    <div class="form-group">
-                                        <label>Password</label>
-                                        <div class="input-with-icon">
-                                            <input type="password" class="form-control" placeholder="*******" name="password">
-                                            <i class="ti-unlock"></i>
+                                        <div class="form-group">
+                                            <label>Password</label>
+                                            <div class="input-with-icon">
+                                                <input type="password" class="form-control" placeholder="*******" name="password">
+                                                <i class="ti-unlock"></i>
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    <div class="form-group">
-                                        <button type="submit" class="btn btn-md full-width btn-theme-light-2 rounded">Login</button>
-                                    </div>
+                                        <div class="form-group">
+                                            <button type="submit" class="btn btn-md full-width btn-theme-light-2 rounded">Login</button>
+                                        </div>
 
-                                </form>
-                            </div>
-                            <div class="modal-divider"><span>Or login via</span></div>
-                            <div class="social-login mb-3">
-                                <ul>
-                                    <li><a href="#" class="btn connect-fb"><i class="ti-facebook"></i>Facebook</a></li>
-                                    <li><a href="#" class="btn connect-google"><i class="ti-google"></i>Google+</a></li>
-                                </ul>
-                            </div>
-                            <div class="text-center">
-                                <p class="mt-5"><a href="#" class="link">Forgot password?</a></p>
+                                    </form>
+                                </div>
+                                <div class="modal-divider"><span>Or login via</span></div>
+                                <div class="social-login mb-3">
+                                    <ul>
+                                        <li><a href="#" class="btn connect-fb"><i class="ti-facebook"></i>Facebook</a></li>
+                                        <li><a href="#" class="btn connect-google"><i class="ti-google"></i>Google+</a></li>
+                                    </ul>
+                                </div>
+                                <div class="text-center">
+                                    <p class="mt-5"><a href="#" class="link">Forgot password?</a></p>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+        
+      
             <!-- End Modal -->}
+        }
 
         <!-- Sign Up Modal -->
         @using (Html.BeginForm("Create", "AppUser"))

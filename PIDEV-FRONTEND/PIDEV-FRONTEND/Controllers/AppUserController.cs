@@ -117,7 +117,18 @@ namespace PIDEV_FRONTEND.Controllers
             userCookie.Expires.AddDays(10);
             HttpContext.Response.SetCookie(userCookie);
             HttpCookie newCookie = Request.Cookies["Token"];
-            return Content(newCookie.Value);
+            Console.WriteLine(newCookie.Value);
+            return View("Login");
+        }
+        public ActionResult Logout()
+        {
+            if (HttpContext.Request.Cookies.AllKeys.Contains("Token"))
+            {
+                Request.Cookies["Token"].Expires = DateTime.Now.AddYears(-1);
+                HttpContext.Response.SetCookie(Request.Cookies["Token"]);
+            }
+                
+            return View("Login");
         }
     }
 }
