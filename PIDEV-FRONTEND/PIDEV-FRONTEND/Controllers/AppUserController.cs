@@ -45,7 +45,7 @@ namespace PIDEV_FRONTEND.Controllers
 
         // POST: AppUser/Create
         [HttpPost]
-        public ActionResult Create(string firstName,string lastName,string password,string email)
+        public ActionResult Create(string firstName, string lastName, string password, string email)
         {
             HttpClient client = new HttpClient();
             client.BaseAddress = new Uri("http://localhost:8081");
@@ -109,7 +109,7 @@ namespace PIDEV_FRONTEND.Controllers
             LoginForm log = new LoginForm();
             log.email = email;
             log.password = password;
-            String invalidCredentials="";
+            String invalidCredentials = "";
 
             HttpResponseMessage response = await client.PostAsJsonAsync<LoginForm>("login", log).ContinueWith((postTask) => postTask.Result);
             if (response.IsSuccessStatusCode)
@@ -125,7 +125,8 @@ namespace PIDEV_FRONTEND.Controllers
                 Console.WriteLine(newCookie.Value);
 
             }
-            else {
+            else
+            {
                 invalidCredentials = "Invalid Credentials";
                 ViewBag.err = invalidCredentials;
                 return View("home");
@@ -139,7 +140,7 @@ namespace PIDEV_FRONTEND.Controllers
                 Request.Cookies["Token"].Expires = DateTime.Now.AddYears(-1);
                 HttpContext.Response.SetCookie(Request.Cookies["Token"]);
             }
-                
+
             return View("home");
         }
         public ActionResult addPropertyView()
@@ -150,7 +151,7 @@ namespace PIDEV_FRONTEND.Controllers
         {
             return View();
         }
-        public async System.Threading.Tasks.Task<ActionResult> AddAnnouncementAsync(string estateType,string location,double price)
+        public async System.Threading.Tasks.Task<ActionResult> AddAnnouncementAsync(string estateType, string location, double price)
         {
             Announcement ann = new Announcement();
             ann.estateType = estateType;
@@ -162,14 +163,15 @@ namespace PIDEV_FRONTEND.Controllers
             Debug.WriteLine(jwtEncodedString);
             // var token = new JwtSecurityToken(jwtEncodedString: jwtEncodedString);
 
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer",jwtEncodedString);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", jwtEncodedString);
             HttpResponseMessage response = await client.PostAsJsonAsync<Announcement>("apiHF/addAnnounce", ann).ContinueWith((postTask) => postTask.Result);
             if (response.IsSuccessStatusCode)
             {
                 ViewBag.status = response.StatusCode;
                 ViewBag.auth = client.DefaultRequestHeaders.Authorization;
             }
-            else {
+            else
+            {
                 ViewBag.status = response.StatusCode;
                 ViewBag.auth = client.DefaultRequestHeaders.Authorization;
                 Debug.WriteLine(response.ToString());
