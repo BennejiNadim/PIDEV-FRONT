@@ -153,6 +153,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Announcement.cs" />
     <Compile Include="Models\AppUser.cs" />
     <Compile Include="Models\LoginForm.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -369,6 +370,10 @@
     <Content Include="Views\AppUser\Index.cshtml" />
     <Content Include="Views\AppUser\Create.cshtml" />
     <Content Include="Views\Shared\_CustomLayout.cshtml" />
+    <Content Include="Views\AppUser\addPropertyView.cshtml" />
+    <Content Include="Views\AppUser\home.cshtml" />
+    <Content Include="Views\AppUser\Login.cshtml" />
+    <Content Include="Views\AppUser\Logout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

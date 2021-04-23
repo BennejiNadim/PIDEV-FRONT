@@ -182,5 +182,22 @@ namespace PIDEV_FRONTEND.Controllers
             }
             return View("home");
         }
+
+        public async System.Threading.Tasks.Task<string> usernameAsync()
+        {
+            string jwtEncodedString = Request.Cookies["Token"].Value;
+            string username = "";
+            HttpClient client = new HttpClient();
+            client.BaseAddress = new Uri("http://localhost:8081");
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", jwtEncodedString);
+            HttpResponseMessage response = client.GetAsync("userapi/loggedInUsername").Result;
+            if (response.IsSuccessStatusCode)
+            {
+                username = await response.Content.ReadAsStringAsync();
+
+            }
+            return username;
+        }
     }
 }
+   

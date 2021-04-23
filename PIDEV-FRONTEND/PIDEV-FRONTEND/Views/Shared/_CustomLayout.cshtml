@@ -144,6 +144,17 @@
                         </ul>
 
                         <ul class="nav-menu nav-menu-social align-to-right">
+                            @if (Context.Request.Cookies["Token"] != null)
+                            {
+                                <li>
+                                    <a href="~/AppUser/usernameAsync" data-bs-toggle="modal" data-bs-target="#" class="text-success">
+                                        <i class="fas fa-user-circle mr-2"></i>@Html.Action("usernameAsync","AppUser")
+                                    </a>
+                                </li>
+                            }
+                            <li class="add-listing theme-bg">
+                                <a href="~/AppUser/addPropertyView">Add Property</a>
+                            </li>
                             @if (Context.Request.Cookies["Token"] == null)
                             {
                                 <li>
@@ -164,9 +175,7 @@
                                 }
 
                             }
-                            <li class="add-listing theme-bg">
-                                <a href="~/AppUser/addPropertyView">Add Property</a>
-                            </li>
+
                         </ul>
                     </div>
                 </nav>
