@@ -12,5 +12,10 @@ namespace PIDEV_FRONTEND.Models
         public string password { get; set; }
         public string firstName { get; set; }
         public string lastName { get; set; }
+        public string adress { get; set; }
+        public int phoneNumber { get; set; }
+        public string aboutMe { get; set; }
+        public string profilePic { get; set; }
+
     }
 }

@@ -1,0 +1,176 @@
+﻿
+@{
+    ViewBag.Title = "profile";
+    Layout = "~/Views/Shared/_CustomLayout.cshtml";
+}
+
+
+<!-- ============================ Page Title Start================================== -->
+<div class="page-title">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12">
+
+                <h2 class="ipt-title">Welcome!</h2>
+                <span class="ipn-subtitle">Welcome To Your Account</span>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ============================ Page Title End ================================== -->
+<!-- ============================ User Dashboard ================================== -->
+<section class="bg-light">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 col-md-12">
+                <div class="filter_search_opt">
+                    <a href="javascript:void(0);" onclick="openFilterSearch()">Dashboard Navigation<i class="ml-2 ti-menu"></i></a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+
+            <div class="col-lg-3 col-md-12">
+
+                <div class="simple-sidebar sm-sidebar" id="filter_search">
+
+                    <div class="search-sidebar_header">
+                        <h4 class="ssh_heading">Close Filter</h4>
+                        <button onclick="closeFilterSearch()" class="w3-bar-item w3-button w3-large"><i class="ti-close"></i></button>
+                    </div>
+
+                    <div class="sidebar-widgets">
+                        <div class="dashboard-navbar">
+
+                            <div class="d-user-avater">
+    
+                                    <img src="~/Content/img/profileImages/@(ViewBag.user.profilePic == null ? String.Empty : ViewBag.user.profilePic)" class="img-fluid avater" alt="#">
+                                    <h4>@(ViewBag.user.firstName == null ? String.Empty : ViewBag.user.firstName) @(ViewBag.user.lastName == null ? String.Empty : ViewBag.user.lastName)</h4>
+                            </div>
+
+                            <div class="d-navigation">
+                                <ul>
+                                    <li><a href="~/AppUser/dashboard"><i class="ti-dashboard"></i>Dashboard</a></li>
+                                    <li class="active"><a href="~/AppUser/profile"><i class="ti-user"></i>My Profile</a></li>
+                                    <li><a href="~/AppUser/bookmarks"><i class="ti-bookmark"></i>Bookmarked Listings</a></li>
+                                    <li><a href="~/AppUser/myproperty"><i class="ti-layers"></i>My Properties</a></li>
+                                    <li><a href="~/AppUser/submitPropertyDashboard"><i class="ti-pencil-alt"></i>Submit New Property</a></li>
+                                    <li><a href="~/AppUser/changePassword"><i class="ti-unlock"></i>Change Password</a></li>
+                                    <li><a href="~/AppUser/Logout"><i class="ti-power-off"></i>Log Out</a></li>
+                                </ul>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+           
+                <div class="col-lg-9 col-md-12">
+                    <div class="dashboard-wraper">
+
+                        <!-- Basic Information -->
+                        @using (Html.BeginForm("updateProfile", "AppUser"))
+                        {
+                            <div class="form-submit">
+                                <h4>My Account</h4>
+                                <div class="submit-section">
+                                    <div class="row">
+
+                                        <div class="form-group col-md-6">
+                                            <label>first name</label>
+                                            <input type="text" class="form-control" value="@(ViewBag.user.firstName == null ? String.Empty : ViewBag.user.firstName)" name="firstName">
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label>last name</label>
+                                            <input type="text" class="form-control" value="@(ViewBag.user.lastName == null ? String.Empty : ViewBag.user.lastName)" name="lastName">
+                                        </div>
+
+                                        <div class="form-group col-md-6">
+                                            <label>Email</label>
+                                            <input type="email" class="form-control" value="@(ViewBag.user.email == null ? String.Empty : ViewBag.user.email)" name="email">
+                                        </div>
+
+                                        <div class="form-group col-md-6">
+                                            <label>Phone</label>
+                                            <input type="number" class="form-control" value="@(ViewBag.user.phoneNumber == null ? String.Empty : ViewBag.user.phoneNumber)" name="phoneNumber">
+                                        </div>
+
+                                        <div class="form-group col-md-6">
+                                            <label>Address</label>
+                                            <input type="text" class="form-control" value="@(ViewBag.user.adress == null ? String.Empty : ViewBag.user.adress)" name="adress">
+                                        </div>
+
+                                        <div class="form-group col-md-12">
+                                            <label>About me</label>
+                                            <textarea name="aboutMe" class="form-control">@(ViewBag.user.aboutMe == null ? String.Empty : ViewBag.user.aboutMe)</textarea>
+                                        </div>
+
+                                        <div class="form-group col-md-6">
+                                            <label>Your Title</label>
+                                            <input type="text" class="form-control" value="Web Designer">
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label>City</label>
+                                            <input type="text" class="form-control" value="Montquebe">
+                                        </div>
+
+                                        <div class="form-group col-md-6">
+                                            <label>State</label>
+                                            <input type="text" class="form-control" value="Canada">
+                                        </div>
+
+                                        <div class="form-group col-md-6">
+                                            <label>Zip</label>
+                                            <input type="text" class="form-control" value="160052">
+                                        </div>
+
+
+
+
+                                        <div class="form-group col-lg-12 col-md-12">
+                                            <button class="btn btn-theme-light-2 rounded" type="submit">Save Changes</button>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        <div class="form-group col-lg-12 col-md-12">
+                            @using (Html.BeginForm("saveImage", "AppUser",FormMethod.Post, new { id = "form", enctype="multipart/form-data" }))
+                            {
+
+                                <input type="file" name="image" id="image" accept="image/x-png, image/gif, image/jpeg">
+                                <input type="submit" class="btn btn-theme-light-2 rounded" value="save">
+                            }
+                        </div>
+                    </div>
+                </div>
+            
+
+
+            </div>
+    </div>
+</section>
+<!-- ============================ User Dashboard End ================================== -->
+<!-- ============================ Call To Action ================================== -->
+<section class="theme-bg call-to-act-wrap">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+
+                <div class="call-to-act">
+                    <div class="call-to-act-head">
+                        <h3>Want to Become a Real Estate Agent?</h3>
+                        <span>We'll help you to grow your career and growth.</span>
+                    </div>
+                    <a href="#" class="btn btn-call-to-act">SignUp Today</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ============================ Call To Action End ================================== -->

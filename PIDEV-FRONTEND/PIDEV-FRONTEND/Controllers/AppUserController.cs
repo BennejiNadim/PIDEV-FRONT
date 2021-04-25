@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IdentityModel.Tokens.Jwt;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -17,7 +18,7 @@ namespace PIDEV_FRONTEND.Controllers
         public ActionResult Index()
         {
             HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri("http://localhost:8081");
+            client.BaseAddress = new Uri("http://localhost:8082");
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             HttpResponseMessage response = client.GetAsync("admin/users").Result;
             if (response.IsSuccessStatusCode)
@@ -28,6 +29,8 @@ namespace PIDEV_FRONTEND.Controllers
             {
                 ViewBag.result = "error";
             }
+            ViewBag.signup = "";
+                ViewBag.signin = "";
             return View("home");
         }
 
@@ -48,13 +51,14 @@ namespace PIDEV_FRONTEND.Controllers
         public ActionResult Create(string firstName, string lastName, string password, string email)
         {
             HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri("http://localhost:8081");
+            client.BaseAddress = new Uri("http://localhost:8082");
             AppUser user = new AppUser();
             user.email = email;
             user.firstName = firstName;
             user.lastName = lastName;
             user.password = password;
             client.PostAsJsonAsync<AppUser>("registerApi/Signup", user).ContinueWith((postTask) => postTask.Result.EnsureSuccessStatusCode());
+            ViewBag.signup = "Sign up successful";
             return View("home");
         }
 
@@ -105,7 +109,7 @@ namespace PIDEV_FRONTEND.Controllers
         public async System.Threading.Tasks.Task<ActionResult> LoginAsync(string email, string password)
         {
             HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri("http://localhost:8081");
+            client.BaseAddress = new Uri("http://localhost:8082");
             LoginForm log = new LoginForm();
             log.email = email;
             log.password = password;
@@ -141,7 +145,7 @@ namespace PIDEV_FRONTEND.Controllers
                 HttpContext.Response.SetCookie(Request.Cookies["Token"]);
             }
 
-            return View("home");
+            return RedirectToAction("home");
         }
         public ActionResult addPropertyView()
         {
@@ -149,6 +153,7 @@ namespace PIDEV_FRONTEND.Controllers
         }
         public ActionResult home()
         {
+            ViewBag.user = this.currentUser();
             return View();
         }
         public async System.Threading.Tasks.Task<ActionResult> AddAnnouncementAsync(string estateType, string location, double price)
@@ -158,7 +163,7 @@ namespace PIDEV_FRONTEND.Controllers
             ann.location = location;
             ann.price = price;
             HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri("http://localhost:8081");
+            client.BaseAddress = new Uri("http://localhost:8082");
             string jwtEncodedString = Request.Cookies["Token"].Value;
             Debug.WriteLine(jwtEncodedString);
             // var token = new JwtSecurityToken(jwtEncodedString: jwtEncodedString);
@@ -188,7 +193,7 @@ namespace PIDEV_FRONTEND.Controllers
             string jwtEncodedString = Request.Cookies["Token"].Value;
             string username = "";
             HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri("http://localhost:8081");
+            client.BaseAddress = new Uri("http://localhost:8082");
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", jwtEncodedString);
             HttpResponseMessage response = client.GetAsync("userapi/loggedInUsername").Result;
             if (response.IsSuccessStatusCode)
@@ -198,6 +203,189 @@ namespace PIDEV_FRONTEND.Controllers
             }
             return username;
         }
-    }
+        public AppUser currentUser()
+        {
+            AppUser user = new AppUser();
+            if (HttpContext.Request.Cookies.AllKeys.Contains("Token"))
+            { 
+            string jwtEncodedString = Request.Cookies["Token"].Value;
+            HttpClient client = new HttpClient();
+            client.BaseAddress = new Uri("http://localhost:8082");
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", jwtEncodedString);
+            HttpResponseMessage response = client.GetAsync("userapi/currentUser").Result;
+            if (response.IsSuccessStatusCode)
+            {
+                user = response.Content.ReadAsAsync<AppUser>().Result;
+            }
+            
+            }
+            return user;
+        }
+        public ActionResult profile()
+        {
+            ViewBag.user = this.currentUser();
+            return View();
+        }
+        public ActionResult dashboard()
+        {
+            ViewBag.user = this.currentUser();
+            return View();
+        }
+        public ActionResult bookmarks()
+        {
+
+
+            HttpClient client = new HttpClient();
+            client.BaseAddress = new Uri("http://localhost:8082");
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            string jwtEncodedString = Request.Cookies["Token"].Value;
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", jwtEncodedString);
+            HttpResponseMessage response = client.GetAsync("apiHF/Favourites").Result;
+
+                ViewBag.favourites = response.Content.ReadAsAsync<IEnumerable<Announcement>>().Result;
+  
+            ViewBag.user = this.currentUser();
+            return View();
+        }
+        public ActionResult myproperty()
+        {
+            ViewBag.user = this.currentUser();
+            return View();
+        }
+        public ActionResult submitPropertyDashboard()
+        {
+            ViewBag.user = this.currentUser();
+            return View();
+        }
+        public ActionResult changePassword()
+        {
+            ViewBag.user = this.currentUser();
+            return View();
+        }
+        public ActionResult updateProfile(string firstName, string lastName, string email, int phoneNumber, string adress, string aboutMe)
+        {
+            AppUser user = new AppUser();
+            if(firstName!=null)
+            { user.firstName = firstName; }
+            if (lastName != null)
+            { user.lastName = lastName; }
+            if (email != null)
+            { user.email = email; }
+            if (phoneNumber != 0)
+            { user.phoneNumber = phoneNumber; }
+            if (adress != null)
+            { user.adress = adress; }
+            if (aboutMe != null)
+            { user.aboutMe = aboutMe; }
+            HttpClient client = new HttpClient();
+            client.BaseAddress = new Uri("http://localhost:8082");
+            string jwtEncodedString = Request.Cookies["Token"].Value;
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", jwtEncodedString);
+            HttpResponseMessage msg =  client.PostAsJsonAsync<AppUser>("userapi/updateProfile", user).ContinueWith((postTask) => postTask.Result.EnsureSuccessStatusCode()).Result;
+            ViewBag.user = this.currentUser();
+            return RedirectToAction("profile");
+        }
+        [HttpPost]
+        public ActionResult saveImage(HttpPostedFileBase image)
+        {
+            var img = Path.GetFileName(image.FileName);
+            if(img!=null && img.Length>0)
+            {
+                var path = Path.Combine(Server.MapPath("~/Content/img/profileImages"), img);
+                image.SaveAs(path);
+                AppUser user = new AppUser();
+                user.profilePic = img;
+                HttpClient client = new HttpClient();
+                client.BaseAddress = new Uri("http://localhost:8082");
+                string jwtEncodedString = Request.Cookies["Token"].Value;
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", jwtEncodedString);
+                HttpResponseMessage msg = client.PostAsJsonAsync<AppUser>("userapi/updateProfile", user).ContinueWith((postTask) => postTask.Result.EnsureSuccessStatusCode()).Result;
+            }
+
+
+            ViewBag.user = this.currentUser();
+            return RedirectToAction("profile");
+        }
+        [HttpPost]
+        public ActionResult changePassword(string old,string newPass,string newPassConfirm)
+        {
+            if (newPass.Equals(newPassConfirm))
+            {
+                PassForm p = new PassForm();
+                p.old = old;
+                p.newPass = newPass;
+                HttpClient client = new HttpClient();
+                client.BaseAddress = new Uri("http://localhost:8082");
+                string jwtEncodedString = Request.Cookies["Token"].Value;
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", jwtEncodedString);
+                HttpResponseMessage msg = client.PostAsJsonAsync<PassForm>("userapi/updatePassword", p).ContinueWith((postTask) => postTask.Result.EnsureSuccessStatusCode()).Result;
+            }
+            ViewBag.user = this.currentUser();
+            return RedirectToAction("profile");
+        }
+
+        public ActionResult Listings()
+        {
+            HttpClient client = new HttpClient();
+            client.BaseAddress = new Uri("http://localhost:8082");
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            HttpResponseMessage response = client.GetAsync("apiHF/getAnnounces").Result;
+              if (response.IsSuccessStatusCode)
+              {
+                  ViewBag.anns = response.Content.ReadAsAsync<IEnumerable<Announcement>>().Result;
+              }
+              else
+              {
+                  ViewBag.anns = "error";
+              } 
+
+            
+            ViewBag.user = this.currentUser();
+            return View();
+        }
+        public ActionResult singleProperty(int announcementId)
+        {
+            HttpClient client = new HttpClient();
+            //  client.BaseAddress = new Uri("http://localhost:8082");
+            string jwtEncodedString = Request.Cookies["Token"].Value;
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", jwtEncodedString);
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            UriBuilder builder = new UriBuilder("http://localhost:8082/apiHF/Announce");
+            builder.Query = "id="+ announcementId;
+            HttpResponseMessage response = client.GetAsync(builder.Uri).Result;
+
+                ViewBag.announcement = response.Content.ReadAsAsync<Announcement>().Result;
+            Debug.WriteLine("response : " + response.Content.ReadAsAsync<Announcement>().Result);
+ 
+            return View();
+        }
+        public ActionResult saveToBookmarks(int announcementId)
+        {
+            HttpClient client = new HttpClient();
+            string jwtEncodedString = Request.Cookies["Token"].Value;
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", jwtEncodedString);
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            UriBuilder builder = new UriBuilder("http://localhost:8082/apiHF/addToFavourite");
+            builder.Query = "id=" + announcementId;
+            HttpResponseMessage response = client.PostAsync(builder.Uri.ToString(),null).Result;
+            return RedirectToAction("singleProperty","AppUser",new { @announcementId = announcementId });
+        }
+        public ActionResult deleteFromFavourite(int announcementId)
+        {
+            HttpClient client = new HttpClient();
+            string jwtEncodedString = Request.Cookies["Token"].Value;
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", jwtEncodedString);
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            UriBuilder builder = new UriBuilder("http://localhost:8082/apiHF/DeleteFromFavourite");
+            builder.Query = "id=" + announcementId;
+            HttpResponseMessage response = client.DeleteAsync(builder.Uri.ToString()).Result;
+
+            return RedirectToAction("bookmarks");
+        }
+
+
+
 }
+    }
+
    

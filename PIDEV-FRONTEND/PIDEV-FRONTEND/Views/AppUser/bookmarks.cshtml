@@ -1,0 +1,135 @@
+﻿
+@{
+    ViewBag.Title = "bookmarks";
+    Layout = "~/Views/Shared/_CustomLayout.cshtml";
+}
+<!-- ============================ Page Title Start================================== -->
+<div class="page-title">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12">
+
+                <h2 class="ipt-title">Welcome!</h2>
+                <span class="ipn-subtitle">Welcome To Your Account</span>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ============================ Page Title End ================================== -->
+<!-- ============================ User Dashboard ================================== -->
+<section class="bg-light">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 col-md-12">
+                <div class="filter_search_opt">
+                    <a href="javascript:void(0);" onclick="openFilterSearch()">Dashboard Navigation<i class="ml-2 ti-menu"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="col-lg-3 col-md-12">
+
+                <div class="simple-sidebar sm-sidebar" id="filter_search">
+
+                    <div class="search-sidebar_header">
+                        <h4 class="ssh_heading">Close Filter</h4>
+                        <button onclick="closeFilterSearch()" class="w3-bar-item w3-button w3-large"><i class="ti-close"></i></button>
+                    </div>
+
+                    <div class="sidebar-widgets">
+                        <div class="dashboard-navbar">
+
+                            <div class="d-user-avater">
+
+                                <img src="~/Content/img/profileImages/@ViewBag.user.profilePic" class="img-fluid avater" alt="#">
+                                <h4>@ViewBag.user.firstName @ViewBag.user.lastName</h4>
+                            </div>
+
+                            <div class="d-navigation">
+                                <ul>
+                                    <li><a href="~/AppUser/dashboard"><i class="ti-dashboard"></i>Dashboard</a></li>
+                                    <li class="active"><a href="~/AppUser/profile"><i class="ti-user"></i>My Profile</a></li>
+                                    <li><a href="~/AppUser/bookmarks"><i class="ti-bookmark"></i>Bookmarked Listings</a></li>
+                                    <li><a href="~/AppUser/myproperty"><i class="ti-layers"></i>My Properties</a></li>
+                                    <li><a href="~/AppUser/submitPropertyDashboard"><i class="ti-pencil-alt"></i>Submit New Property</a></li>
+                                    <li><a href="~/AppUser/changePassword"><i class="ti-unlock"></i>Change Password</a></li>
+                                    <li><a href="#"><i class="ti-power-off"></i>Log Out</a></li>
+                                </ul>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-lg-9 col-md-12">
+                <div class="dashboard-wraper">
+
+                    <!-- Bookmark Property -->
+                    <div class="form-submit">
+                        <h4>Bookmark Property</h4>
+                    </div>
+
+                    <table class="property-table-wrap responsive-table bkmark">
+
+                        <tbody>
+                            <tr>
+                                <th><i class="fa fa-file-text"></i> Property</th>
+                                <th></th>
+                            </tr>
+                            @if (ViewBag.favourites != null)
+                            {
+                                foreach (var item in ViewBag.favourites)
+                            {
+                                    <tr>
+                                        <td class="property-container">
+                                            <img src="~/Content/img/p-2.jpg" alt="">
+                                            <div class="title">
+                                                <h4><a href="#">property name</a></h4>
+                                                <span>@item.location</span>
+                                                <span class="table-property-price">@item.price</span>
+                                            </div>
+                                        </td>
+                                        <td class="action">
+                                            <a href="@Url.Action("deleteFromFavourite", "AppUser", new { announcementId = @item.announcementId})" class="delete"><i class="ti-close"></i> Delete</a>
+                                        </td>
+                                    </tr>
+                            }
+                            }
+
+
+
+
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+<!-- ============================ User Dashboard End ================================== -->
+<!-- ============================ Call To Action ================================== -->
+<section class="theme-bg call-to-act-wrap">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+
+                <div class="call-to-act">
+                    <div class="call-to-act-head">
+                        <h3>Want to Become a Real Estate Agent?</h3>
+                        <span>We'll help you to grow your career and growth.</span>
+                    </div>
+                    <a href="#" class="btn btn-call-to-act">SignUp Today</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ============================ Call To Action End ================================== -->

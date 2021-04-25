@@ -32,7 +32,7 @@
                 <nav id="navigation" class="navigation navigation-landscape">
                     <div class="nav-header">
                         <a class="nav-brand" href="#">
-                            <img src="assets/img/logo.png" class="logo" alt="" />
+                            <img src="~/Content/img/logo.png" class="logo" alt="" />
                         </a>
                         <div class="nav-toggle"></div>
                     </div>
@@ -40,7 +40,7 @@
                         <ul class="nav-menu">
 
                             <li class="active">
-                                <a href="#">Home<span class="submenu-indicator"></span></a>
+                                <a href="~/AppUser/home">Home<span class="submenu-indicator"></span></a>
                                 <ul class="nav-dropdown nav-submenu">
                                     <li><a class="active" href="index.html">Home Layout 1</a></li>
                                     <li><a href="home-2.html">Home Layout 2</a></li>
@@ -55,7 +55,7 @@
                             </li>
 
                             <li>
-                                <a href="JavaScript:Void(0);">Listings<span class="submenu-indicator"></span></a>
+                                <a href="~/AppUser/Listings">Listings<span class="submenu-indicator"></span></a>
                                 <ul class="nav-dropdown nav-submenu">
                                     <li>
                                         <a href="JavaScript:Void(0);">List Layout<span class="submenu-indicator"></span></a>
@@ -147,8 +147,8 @@
                             @if (Context.Request.Cookies["Token"] != null)
                             {
                                 <li>
-                                    <a href="~/AppUser/usernameAsync" data-bs-toggle="modal" data-bs-target="#" class="text-success">
-                                        <i class="fas fa-user-circle mr-2"></i>@Html.Action("usernameAsync","AppUser")
+                                    <a href="~/AppUser/profile" data-bs-toggle="modal" data-bs-target="#" class="text-success">
+                                        <i class="fas fa-user-circle mr-2"></i>@Html.Action("usernameAsync", "AppUser")
                                     </a>
                                 </li>
                             }
@@ -167,11 +167,12 @@
                             {
 
                                 {
-                                    <li>
-                                        <a href="~/AppUser/Logout" data-bs-target="#" class="text-success">
-                                            <i class="fas fa-user-circle mr-2"></i>Logout
-                                        </a>
-                                    </li>
+
+                                    <ul class="nav-menu nav-menu-social align-to-right">
+                                        <li>
+                                            <a href="~/AppUser/Logout"><img src="~/Content/img/off.svg" class="mr-2" width="17" alt="" />Sign Out</a>
+                                        </li>
+                                    </ul>
                                 }
 
                             }
@@ -192,7 +193,7 @@
 
                         <div class="col-lg-3 col-md-4">
                             <div class="footer-widget">
-                                <img src="assets/img/logo-light.png" class="img-footer" alt="" />
+                                <img src="~/Content/img/logo.png" class="img-footer" alt="" />
                                 <div class="footer-add">
                                     <p>Collins Street West, Victoria 8007, Australia.</p>
                                     <p>+1 246-345-0695</p>
@@ -341,7 +342,7 @@
                                 <p class="mt-5"><a href="#" class="link">Forgot password?</a></p>
                             </div>
                             <div class="text-center">
-                                <p class="mt-5">@ViewBag.err</p>
+                                <p class="mt-5">@(ViewBag.signin == null ? String.Empty : ViewBag.signin)</p>
                             </div>
                         </div>
                     </div>
