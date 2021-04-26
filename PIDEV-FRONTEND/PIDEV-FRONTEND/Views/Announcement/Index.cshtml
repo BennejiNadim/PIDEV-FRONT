@@ -1,0 +1,90 @@
+﻿@model IEnumerable<PIDEV_FRONTEND.Models.Announcement>
+
+@{
+    ViewBag.Title = "www.compilemode.com";
+}
+
+<div class="form-horizontal">
+
+    <hr />
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <div class="form-group">
+
+        <table class="table table-responsive" style="width:400px">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.type)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.estateType)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.location)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.price)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.descritpion)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.surface)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.numberOfFloors)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.numberOfRooms)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.datePublished)
+                </th>
+                <th></th>
+
+            </tr>
+
+            @foreach (var item in Model)
+            {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.type)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.estateType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.location)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.descritpion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.surface)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.numberOfFloors)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.numberOfRooms)
+            </td> 
+            <td>
+                @Html.DisplayFor(modelItem => item.datePublished)
+            </td>
+
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.announcementId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.announcementId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.announcementId })
+            </td>
+
+        </tr>
+            }
+
+        </table>
+    </div>
+</div>

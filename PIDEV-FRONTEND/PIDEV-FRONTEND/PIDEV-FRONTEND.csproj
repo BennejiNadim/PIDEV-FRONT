@@ -153,8 +153,11 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AnnouncementController.cs" />
     <Compile Include="Controllers\AppUserController.cs" />
+    <Compile Include="Controllers\CriteriaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\NotificationController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -399,14 +402,19 @@
     <Content Include="Views\AppUser\changePassword.cshtml" />
     <Content Include="Views\AppUser\Listings.cshtml" />
     <Content Include="Views\AppUser\SingleProperty.cshtml" />
+    <Content Include="Views\AnnouncementInfo\_Partial.cshtml" />
+    <Content Include="Views\Criteria\Create.cshtml" />
+    <Content Include="Views\Criteria\Edit.cshtml" />
+    <Content Include="Views\Criteria\Index.cshtml" />
+    <Content Include="Views\Notification\Index.cshtml" />
+    <Content Include="Views\ZonePrice\Create.cshtml" />
+    <Content Include="Views\ZonePrice\Edit.cshtml" />
+    <Content Include="Views\ZonePrice\Index.cshtml" />
+    <Content Include="Views\Announcement\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\img\profileImages\" />
-    <Folder Include="Views\AnnouncementInfo\" />
-    <Folder Include="Views\Criteria\" />
-    <Folder Include="Views\Notification\" />
-    <Folder Include="Views\ZonePrice\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

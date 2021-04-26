@@ -18,7 +18,7 @@ namespace PIDEV_FRONTEND.Controllers
         public ActionResult Index()
         {
             HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri("http://localhost:8082");
+            client.BaseAddress = new Uri("http://localhost:8081");
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             HttpResponseMessage response = client.GetAsync("admin/users").Result;
             if (response.IsSuccessStatusCode)
@@ -51,7 +51,7 @@ namespace PIDEV_FRONTEND.Controllers
         public ActionResult Create(string firstName, string lastName, string password, string email)
         {
             HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri("http://localhost:8082");
+            client.BaseAddress = new Uri("http://localhost:8081");
             AppUser user = new AppUser();
             user.email = email;
             user.firstName = firstName;
@@ -109,7 +109,7 @@ namespace PIDEV_FRONTEND.Controllers
         public async System.Threading.Tasks.Task<ActionResult> LoginAsync(string email, string password)
         {
             HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri("http://localhost:8082");
+            client.BaseAddress = new Uri("http://localhost:8081");
             LoginForm log = new LoginForm();
             log.email = email;
             log.password = password;
@@ -163,7 +163,7 @@ namespace PIDEV_FRONTEND.Controllers
             ann.location = location;
             ann.price = price;
             HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri("http://localhost:8082");
+            client.BaseAddress = new Uri("http://localhost:8081");
             string jwtEncodedString = Request.Cookies["Token"].Value;
             Debug.WriteLine(jwtEncodedString);
             // var token = new JwtSecurityToken(jwtEncodedString: jwtEncodedString);
@@ -193,7 +193,7 @@ namespace PIDEV_FRONTEND.Controllers
             string jwtEncodedString = Request.Cookies["Token"].Value;
             string username = "";
             HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri("http://localhost:8082");
+            client.BaseAddress = new Uri("http://localhost:8081");
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", jwtEncodedString);
             HttpResponseMessage response = client.GetAsync("userapi/loggedInUsername").Result;
             if (response.IsSuccessStatusCode)
@@ -210,7 +210,7 @@ namespace PIDEV_FRONTEND.Controllers
             { 
             string jwtEncodedString = Request.Cookies["Token"].Value;
             HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri("http://localhost:8082");
+            client.BaseAddress = new Uri("http://localhost:8081");
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", jwtEncodedString);
             HttpResponseMessage response = client.GetAsync("userapi/currentUser").Result;
             if (response.IsSuccessStatusCode)
@@ -236,7 +236,7 @@ namespace PIDEV_FRONTEND.Controllers
 
 
             HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri("http://localhost:8082");
+            client.BaseAddress = new Uri("http://localhost:8081");
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             string jwtEncodedString = Request.Cookies["Token"].Value;
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", jwtEncodedString);
@@ -278,7 +278,7 @@ namespace PIDEV_FRONTEND.Controllers
             if (aboutMe != null)
             { user.aboutMe = aboutMe; }
             HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri("http://localhost:8082");
+            client.BaseAddress = new Uri("http://localhost:8081");
             string jwtEncodedString = Request.Cookies["Token"].Value;
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", jwtEncodedString);
             HttpResponseMessage msg =  client.PostAsJsonAsync<AppUser>("userapi/updateProfile", user).ContinueWith((postTask) => postTask.Result.EnsureSuccessStatusCode()).Result;
@@ -296,7 +296,7 @@ namespace PIDEV_FRONTEND.Controllers
                 AppUser user = new AppUser();
                 user.profilePic = img;
                 HttpClient client = new HttpClient();
-                client.BaseAddress = new Uri("http://localhost:8082");
+                client.BaseAddress = new Uri("http://localhost:8081");
                 string jwtEncodedString = Request.Cookies["Token"].Value;
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", jwtEncodedString);
                 HttpResponseMessage msg = client.PostAsJsonAsync<AppUser>("userapi/updateProfile", user).ContinueWith((postTask) => postTask.Result.EnsureSuccessStatusCode()).Result;
@@ -315,7 +315,7 @@ namespace PIDEV_FRONTEND.Controllers
                 p.old = old;
                 p.newPass = newPass;
                 HttpClient client = new HttpClient();
-                client.BaseAddress = new Uri("http://localhost:8082");
+                client.BaseAddress = new Uri("http://localhost:8081");
                 string jwtEncodedString = Request.Cookies["Token"].Value;
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", jwtEncodedString);
                 HttpResponseMessage msg = client.PostAsJsonAsync<PassForm>("userapi/updatePassword", p).ContinueWith((postTask) => postTask.Result.EnsureSuccessStatusCode()).Result;
@@ -327,7 +327,7 @@ namespace PIDEV_FRONTEND.Controllers
         public ActionResult Listings()
         {
             HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri("http://localhost:8082");
+            client.BaseAddress = new Uri("http://localhost:8081");
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             HttpResponseMessage response = client.GetAsync("apiHF/getAnnounces").Result;
               if (response.IsSuccessStatusCode)
@@ -346,11 +346,11 @@ namespace PIDEV_FRONTEND.Controllers
         public ActionResult singleProperty(int announcementId)
         {
             HttpClient client = new HttpClient();
-            //  client.BaseAddress = new Uri("http://localhost:8082");
+            //  client.BaseAddress = new Uri("http://localhost:8081");
             string jwtEncodedString = Request.Cookies["Token"].Value;
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", jwtEncodedString);
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            UriBuilder builder = new UriBuilder("http://localhost:8082/apiHF/Announce");
+            UriBuilder builder = new UriBuilder("http://localhost:8081/apiHF/Announce");
             builder.Query = "id="+ announcementId;
             HttpResponseMessage response = client.GetAsync(builder.Uri).Result;
 
@@ -365,7 +365,7 @@ namespace PIDEV_FRONTEND.Controllers
             string jwtEncodedString = Request.Cookies["Token"].Value;
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", jwtEncodedString);
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            UriBuilder builder = new UriBuilder("http://localhost:8082/apiHF/addToFavourite");
+            UriBuilder builder = new UriBuilder("http://localhost:8081/apiHF/addToFavourite");
             builder.Query = "id=" + announcementId;
             HttpResponseMessage response = client.PostAsync(builder.Uri.ToString(),null).Result;
             return RedirectToAction("singleProperty","AppUser",new { @announcementId = announcementId });
@@ -376,7 +376,7 @@ namespace PIDEV_FRONTEND.Controllers
             string jwtEncodedString = Request.Cookies["Token"].Value;
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", jwtEncodedString);
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            UriBuilder builder = new UriBuilder("http://localhost:8082/apiHF/DeleteFromFavourite");
+            UriBuilder builder = new UriBuilder("http://localhost:8081/apiHF/DeleteFromFavourite");
             builder.Query = "id=" + announcementId;
             HttpResponseMessage response = client.DeleteAsync(builder.Uri.ToString()).Result;
 

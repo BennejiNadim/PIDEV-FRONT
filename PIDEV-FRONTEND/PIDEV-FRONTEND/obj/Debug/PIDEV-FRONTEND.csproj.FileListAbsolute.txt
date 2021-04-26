@@ -455,7 +455,6 @@ C:\Users\wmedi\Documents\PIDEV-FRONT\PIDEV-FRONTEND\PIDEV-FRONTEND\bin\fr\System
 C:\Users\wmedi\Documents\PIDEV-FRONT\PIDEV-FRONTEND\PIDEV-FRONTEND\bin\fr\System.Web.WebPages.resources.dll
 C:\Users\wmedi\Documents\PIDEV-FRONT\PIDEV-FRONTEND\PIDEV-FRONTEND\bin\fr\System.Web.WebPages.Deployment.resources.dll
 C:\Users\wmedi\Documents\PIDEV-FRONT\PIDEV-FRONTEND\PIDEV-FRONTEND\bin\fr\System.Web.WebPages.Razor.resources.dll
-C:\Users\wmedi\Documents\PIDEV-FRONT\PIDEV-FRONTEND\PIDEV-FRONTEND\obj\Debug\PIDEV-FRONTEND.csprojAssemblyReference.cache
 C:\Users\wmedi\Documents\PIDEV-FRONT\PIDEV-FRONTEND\PIDEV-FRONTEND\obj\Debug\PIDEV-FRONTEND.csproj.CoreCompileInputs.cache
 C:\Users\wmedi\Documents\PIDEV-FRONT\PIDEV-FRONTEND\PIDEV-FRONTEND\obj\Debug\PIDEV-FRONTEND.csproj.CopyComplete
 C:\Users\wmedi\Documents\PIDEV-FRONT\PIDEV-FRONTEND\PIDEV-FRONTEND\obj\Debug\PIDEV-FRONTEND.dll
