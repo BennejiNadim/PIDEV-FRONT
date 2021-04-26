@@ -1,0 +1,49 @@
+﻿@model IEnumerable<PIDEV_FRONTEND.Models.ZonePrice>
+
+@{
+    ViewBag.Title = "www.compilemode.com";
+}
+
+<div class="form-horizontal">
+
+    <hr />
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <div class="form-group">
+
+        <table class="table table-responsive" style="width:400px">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.pricem2)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.zone)
+                </th>
+                
+                <th></th>
+
+            </tr>
+
+            @foreach (var item in Model)
+            {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.pricem2)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.zone)
+            </td>
+           
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.zoneId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.zoneId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.zoneId })
+            </td>
+
+        </tr>
+            }
+
+        </table>
+    </div>
+</div>

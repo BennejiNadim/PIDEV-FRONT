@@ -159,9 +159,20 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Announcement.cs" />
+    <Compile Include="Models\AnnouncementInfo.cs" />
+    <Compile Include="Models\AnnouncementStats.cs" />
     <Compile Include="Models\AppUser.cs" />
+    <Compile Include="Models\Criteria.cs" />
+    <Compile Include="Models\Documents.cs" />
+    <Compile Include="Models\Interest.cs" />
+    <Compile Include="Models\InterestDocuments.cs" />
     <Compile Include="Models\LoginForm.cs" />
+    <Compile Include="Models\Notification.cs" />
     <Compile Include="Models\PassForm.cs" />
+    <Compile Include="Models\PriceHistory.cs" />
+    <Compile Include="Models\RentHistory.cs" />
+    <Compile Include="Models\SaleHistory.cs" />
+    <Compile Include="Models\ZonePrice.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -392,6 +403,10 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\img\profileImages\" />
+    <Folder Include="Views\AnnouncementInfo\" />
+    <Folder Include="Views\Criteria\" />
+    <Folder Include="Views\Notification\" />
+    <Folder Include="Views\ZonePrice\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

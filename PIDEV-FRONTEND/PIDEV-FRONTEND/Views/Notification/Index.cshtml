@@ -1,0 +1,48 @@
+﻿@model IEnumerable<PIDEV_FRONTEND.Models.Notification>
+
+@{
+    ViewBag.Title = "www.compilemode.com";
+}
+
+<div class="form-horizontal">
+
+    <hr />
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <div class="form-group">
+
+        <table class="table table-responsive" style="width:400px">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.notifType)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.notificationDate)
+                </th>
+
+                <th></th>
+
+            </tr>
+
+            @foreach (var item in Model)
+            {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.notifType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.notificationDate)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.notificationId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.notificationId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.notificationId })
+            </td>
+
+        </tr>
+            }
+
+        </table>
+    </div>
+</div>

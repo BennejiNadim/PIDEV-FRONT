@@ -1,0 +1,107 @@
+﻿@model IEnumerable<PIDEV_FRONTEND.Models.Criteria>
+
+@{
+    ViewBag.Title = "www.compilemode.com";
+}
+
+<div class="form-horizontal">
+
+    <hr />
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <div class="form-group">
+
+        <table class="table table-responsive" style="width:400px">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.criteriaName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.announcementType)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.estateType)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.location)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.minPrice)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.maxPrice)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.minSurface)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.maxSurface)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.minNumberOfFloors)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.maxNumberOfFloors)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.minNumberOfRooms)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.maxNumberOfRooms)
+                </th>
+                <th></th>
+
+            </tr>
+
+            @foreach (var item in Model)
+            {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.criteriaName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.announcementType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.estateType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.location)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.minPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.maxPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.minSurface)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.maxSurface)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.minNumberOfFloors)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.maxNumberOfFloors)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.minNumberOfRooms)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.maxNumberOfRooms)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.criteriaId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.criteriaId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.criteriaId })
+            </td>
+
+        </tr>
+            }
+
+        </table>
+    </div>
+</div>

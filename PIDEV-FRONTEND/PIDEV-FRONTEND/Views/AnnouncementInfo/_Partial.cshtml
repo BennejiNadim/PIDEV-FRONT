@@ -1,0 +1,90 @@
+﻿@model PIDEV_FRONTEND.Models.AnnouncementInfo
+
+<div>
+    <h4>Product</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.type)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.type)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.estateType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.estateType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.location)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.location)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.surface)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.surface)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.numberOfFloors)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.numberOfFloors)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.numberOfRooms)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.numberOfRooms)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.dateCreated)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dateCreated)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.datePublished)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.datePublished)
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.AnnouncementId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
