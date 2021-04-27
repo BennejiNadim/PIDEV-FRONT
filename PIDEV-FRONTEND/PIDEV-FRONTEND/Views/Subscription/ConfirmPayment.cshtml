@@ -1,0 +1,38 @@
+﻿
+@{
+    ViewBag.Title = "ConfirmPayment";
+    Layout = "~/Views/Shared/_CustomLayout.cshtml";
+}
+
+<div class="campagin_start content" style="max-width:100%">
+    <div class="cell example example2" id="">
+        <form>
+            <div class="row">
+                <div class="field">
+                    <div id="example2-card-number" class="input empty"></div>
+                    <label for="example2-card-number" data-tid="elements_examples.form.card_number_label">Card number</label>
+                    <div class="baseline"></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="field half-width">
+                    <div id="example2-card-expiry" class="input empty"></div>
+                    <label for="example2-card-expiry" data-tid="elements_examples.form.card_expiry_label">Expiration</label>
+                    <div class="baseline"></div>
+                </div>
+                <div class="field half-width">
+                    <div id="example2-card-cvc" class="input empty"></div>
+                    <label for="example2-card-cvc" data-tid="elements_examples.form.card_cvc_label">CVC</label>
+                    <div class="baseline"></div>
+                </div>
+            </div>
+
+            <button id="card-button">@WebResources.Donate $@Model.budget</button>
+            <a href="#" class="btn btn-border mt-10" style="display: none;margin-top: 10px;margin-left: 15px;" id="canceltran"> Cancel</a>
+        </form>
+
+        <p id="payment-result"><!-- we'll pass the response from the server here --></p>
+    </div>
+
+</div>
+

@@ -1,6 +1,8 @@
-﻿using System;
+﻿using PIDEV_FRONTEND.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Web;
 using System.Web.Mvc;
 
@@ -20,6 +22,44 @@ namespace PIDEV_FRONTEND.Controllers
             return View();
         }
 
+        public ActionResult SubscriptionPricing(int amount, string subType)
+        {
+            HttpClient client = new HttpClient();
+            client.BaseAddress = new Uri("http://localhost:8081");
+            Subscription sub = new Subscription();
+            sub.amount = amount;
+            sub.subType = subType;
+            client.PostAsJsonAsync<AppUser>("/ActivateSubscription", sub).ContinueWith((postTask) => postTask.Result.EnsureSuccessStatusCode());
+            ViewBag.signup = "Sign up successful";
+            return View();
+        }
+
+        public ActionResult BasicSubscription()
+        {
+
+            return View();
+        }
+        public ActionResult GoldSubscription()
+        {
+
+            return View();
+        }
+        public ActionResult PremiumSubscription()
+        {
+
+            return View();
+        }
+
+        public ActionResult SubscriptionInfo()
+        {
+
+            return View();
+        }
+        
+        public ActionResult ConfirmPayment()
+        {
+            return View();
+        }
         // GET: Subscription/Create
         public ActionResult Create()
         {

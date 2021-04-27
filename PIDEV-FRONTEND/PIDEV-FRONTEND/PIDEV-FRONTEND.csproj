@@ -176,6 +176,7 @@
     <Compile Include="Models\PriceHistory.cs" />
     <Compile Include="Models\RentHistory.cs" />
     <Compile Include="Models\SaleHistory.cs" />
+    <Compile Include="Models\Subscription.cs" />
     <Compile Include="Models\ZonePrice.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -412,11 +413,13 @@
     <Content Include="Views\ZonePrice\Edit.cshtml" />
     <Content Include="Views\ZonePrice\Index.cshtml" />
     <Content Include="Views\Announcement\Index.cshtml" />
+    <Content Include="Views\Subscription\SubscriptionPricing.cshtml" />
+    <Content Include="Views\Subscription\SubscriptionInfo.cshtml" />
+    <Content Include="Views\Subscription\ConfirmPayment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\img\profileImages\" />
-    <Folder Include="Views\Subscription\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
