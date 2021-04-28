@@ -29,7 +29,7 @@ namespace PIDEV_FRONTEND.Controllers
             Subscription sub = new Subscription();
             sub.amount = amount;
             sub.subType = subType;
-            client.PostAsJsonAsync<AppUser>("/ActivateSubscription", sub).ContinueWith((postTask) => postTask.Result.EnsureSuccessStatusCode());
+            client.PostAsJsonAsync<Subscription>("/ActivateSubscription", sub).ContinueWith((postTask) => postTask.Result.EnsureSuccessStatusCode());
             ViewBag.signup = "Sign up successful";
             return View();
         }
