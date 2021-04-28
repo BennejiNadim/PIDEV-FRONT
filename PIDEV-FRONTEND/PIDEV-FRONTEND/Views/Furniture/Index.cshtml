@@ -4,8 +4,7 @@
 }
 
 
-<html>
-<head>
+
 
     <div class="form-horizontal">
 
@@ -17,9 +16,7 @@
 
             <table class="table table-responsive" style="width:400px">
                 <tr>
-                    <th>
-                        @Html.DisplayNameFor(model => model.furnitureId)
-                    </th>
+                    
                     <th>
                         @Html.DisplayNameFor(model => model.furnitureName)
                     </th>
@@ -51,45 +48,47 @@
 
                 @foreach (var item in Model)
                 {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.furnitureId)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.furnitureName)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.fabricator)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.category)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.shippingPrice)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.numberOfPieces)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.FurniturePrice)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.verified)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.active)
-                        </td>
+                <tr>
+                 
+                    <td>
+                        @Html.DisplayFor(modelItem => item.furnitureName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.fabricator)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.category)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.shippingPrice)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.numberOfPieces)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FurniturePrice)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.verified)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.active)
+                    </td>
 
-                        <td>
-                            @Html.ActionLink("Edit", "Edit", new { id = item.furnitureId }) |
-                            @Html.ActionLink("Details", "Details", new { id = item.furnitureId }) |
-                            @Html.ActionLink("Delete", "Delete", new { id = item.furnitureId })
-                        </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.furnitureId }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.furnitureId }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.furnitureId })
+                    </td>
 
-                    </tr>
+                </tr>
                 }
             </table>
 
-
         </div>
     </div>
+
+
+
+
+        

@@ -1,14 +1,14 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
 namespace PIDEV_FRONTEND.Models
 {
-    public class Fruniture
+    public class Furniture
     {
 
-     //   public int furnitureId { get; set; }
+        //   public int furnitureId { get; set; }
         private String FurnitureName { get; set; }
         private String fabricator { get; set; }
         private String category { get; set; }
