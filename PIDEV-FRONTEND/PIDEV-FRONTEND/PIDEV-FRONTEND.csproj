@@ -156,6 +156,7 @@
     <Compile Include="Controllers\AnnouncementController.cs" />
     <Compile Include="Controllers\AppUserController.cs" />
     <Compile Include="Controllers\CriteriaController.cs" />
+    <Compile Include="Controllers\FurnitureController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\NotificationController.cs" />
     <Compile Include="Controllers\SubscriptionController.cs" />
@@ -168,6 +169,7 @@
     <Compile Include="Models\AppUser.cs" />
     <Compile Include="Models\Criteria.cs" />
     <Compile Include="Models\Documents.cs" />
+    <Compile Include="Models\Furniture.cs" />
     <Compile Include="Models\Interest.cs" />
     <Compile Include="Models\InterestDocuments.cs" />
     <Compile Include="Models\LoginForm.cs" />
@@ -416,6 +418,7 @@
     <Content Include="Views\Subscription\SubscriptionPricing.cshtml" />
     <Content Include="Views\Subscription\SubscriptionInfo.cshtml" />
     <Content Include="Views\Subscription\ConfirmPayment.cshtml" />
+    <Content Include="Views\Furniture\Furniture.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
