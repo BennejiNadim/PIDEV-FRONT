@@ -8,7 +8,7 @@ namespace PIDEV_FRONTEND.Models
     public class Fruniture
     {
 
-        //   public int furnitureId { get; set; }
+     //   public int furnitureId { get; set; }
         private String FurnitureName { get; set; }
         private String fabricator { get; set; }
         private String category { get; set; }

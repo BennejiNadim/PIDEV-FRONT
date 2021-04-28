@@ -34,7 +34,7 @@ namespace PIDEV_FRONTEND.Controllers
                 if (Res.IsSuccessStatusCode)
                 {
                     //Storing the response details recieved from web api 
-                    var FrunResponse = Res.Content.ReadAsStringAsync().Result;
+                    var FurnResponse = Res.Content.ReadAsStringAsync().Result;
 
                     //string apiResponse = await response.Content.ReadAsStringAsync();
 
@@ -43,7 +43,7 @@ namespace PIDEV_FRONTEND.Controllers
 
                     if (token.Count<object>() != 0)
                     {
-                        FurnInfo = token.ToObject<List<Furniture>>();
+                        furnInfo = token.ToObject<List<Furniture>>();
                     }
 
                     //Deserializing the response recieved from web api and storing into the Employee list
@@ -51,7 +51,7 @@ namespace PIDEV_FRONTEND.Controllers
 
                 }
                 //returning the employee list to view
-                return View(Furn);
+                return View(furnInfo);
             }
         }
 
