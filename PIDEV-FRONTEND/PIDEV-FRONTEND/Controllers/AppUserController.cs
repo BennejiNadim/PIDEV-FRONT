@@ -30,7 +30,7 @@ namespace PIDEV_FRONTEND.Controllers
                 ViewBag.result = "error";
             }
             ViewBag.signup = "";
-                ViewBag.signin = "";
+            ViewBag.signin = "";
             return View("home");
         }
 
@@ -207,17 +207,17 @@ namespace PIDEV_FRONTEND.Controllers
         {
             AppUser user = new AppUser();
             if (HttpContext.Request.Cookies.AllKeys.Contains("Token"))
-            { 
-            string jwtEncodedString = Request.Cookies["Token"].Value;
-            HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri("http://localhost:8081");
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", jwtEncodedString);
-            HttpResponseMessage response = client.GetAsync("userapi/currentUser").Result;
-            if (response.IsSuccessStatusCode)
             {
-                user = response.Content.ReadAsAsync<AppUser>().Result;
-            }
-            
+                string jwtEncodedString = Request.Cookies["Token"].Value;
+                HttpClient client = new HttpClient();
+                client.BaseAddress = new Uri("http://localhost:8081");
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", jwtEncodedString);
+                HttpResponseMessage response = client.GetAsync("userapi/currentUser").Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    user = response.Content.ReadAsAsync<AppUser>().Result;
+                }
+
             }
             return user;
         }
@@ -242,8 +242,8 @@ namespace PIDEV_FRONTEND.Controllers
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", jwtEncodedString);
             HttpResponseMessage response = client.GetAsync("apiHF/Favourites").Result;
 
-                ViewBag.favourites = response.Content.ReadAsAsync<IEnumerable<Announcement>>().Result;
-  
+            ViewBag.favourites = response.Content.ReadAsAsync<IEnumerable<Announcement>>().Result;
+
             ViewBag.user = this.currentUser();
             return View();
         }
@@ -265,13 +265,14 @@ namespace PIDEV_FRONTEND.Controllers
         public ActionResult updateProfile(string firstName, string lastName, string email, int phoneNumber, string adress, string aboutMe)
         {
             AppUser user = new AppUser();
-            if(firstName!=null)
+            if (firstName != null)
             { user.firstName = firstName; }
             if (lastName != null)
             { user.lastName = lastName; }
             if (email != null)
             { user.email = email; }
             if (phoneNumber != 0)
+            { user.phoneNumber = phoneNumber; }
             { user.phoneNumber = phoneNumber; }
             if (adress != null)
             { user.adress = adress; }
@@ -281,7 +282,7 @@ namespace PIDEV_FRONTEND.Controllers
             client.BaseAddress = new Uri("http://localhost:8081");
             string jwtEncodedString = Request.Cookies["Token"].Value;
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", jwtEncodedString);
-            HttpResponseMessage msg =  client.PostAsJsonAsync<AppUser>("userapi/updateProfile", user).ContinueWith((postTask) => postTask.Result.EnsureSuccessStatusCode()).Result;
+            HttpResponseMessage msg = client.PostAsJsonAsync<AppUser>("userapi/updateProfile", user).ContinueWith((postTask) => postTask.Result.EnsureSuccessStatusCode()).Result;
             ViewBag.user = this.currentUser();
             return RedirectToAction("profile");
         }
@@ -289,7 +290,7 @@ namespace PIDEV_FRONTEND.Controllers
         public ActionResult saveImage(HttpPostedFileBase image)
         {
             var img = Path.GetFileName(image.FileName);
-            if(img!=null && img.Length>0)
+            if (img != null && img.Length > 0)
             {
                 var path = Path.Combine(Server.MapPath("~/Content/img/profileImages"), img);
                 image.SaveAs(path);
@@ -307,7 +308,7 @@ namespace PIDEV_FRONTEND.Controllers
             return RedirectToAction("profile");
         }
         [HttpPost]
-        public ActionResult changePassword(string old,string newPass,string newPassConfirm)
+        public ActionResult changePassword(string old, string newPass, string newPassConfirm)
         {
             if (newPass.Equals(newPassConfirm))
             {
@@ -330,16 +331,16 @@ namespace PIDEV_FRONTEND.Controllers
             client.BaseAddress = new Uri("http://localhost:8081");
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             HttpResponseMessage response = client.GetAsync("apiHF/getAnnounces").Result;
-              if (response.IsSuccessStatusCode)
-              {
-                  ViewBag.anns = response.Content.ReadAsAsync<IEnumerable<Announcement>>().Result;
-              }
-              else
-              {
-                  ViewBag.anns = "error";
-              } 
+            if (response.IsSuccessStatusCode)
+            {
+                ViewBag.anns = response.Content.ReadAsAsync<IEnumerable<Announcement>>().Result;
+            }
+            else
+            {
+                ViewBag.anns = "error";
+            }
 
-            
+
             ViewBag.user = this.currentUser();
             return View();
         }
@@ -351,12 +352,12 @@ namespace PIDEV_FRONTEND.Controllers
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", jwtEncodedString);
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             UriBuilder builder = new UriBuilder("http://localhost:8081/apiHF/Announce");
-            builder.Query = "id="+ announcementId;
+            builder.Query = "id=" + announcementId;
             HttpResponseMessage response = client.GetAsync(builder.Uri).Result;
 
-                ViewBag.announcement = response.Content.ReadAsAsync<Announcement>().Result;
+            ViewBag.announcement = response.Content.ReadAsAsync<Announcement>().Result;
             Debug.WriteLine("response : " + response.Content.ReadAsAsync<Announcement>().Result);
- 
+
             return View();
         }
         public ActionResult saveToBookmarks(int announcementId)
@@ -367,8 +368,8 @@ namespace PIDEV_FRONTEND.Controllers
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             UriBuilder builder = new UriBuilder("http://localhost:8081/apiHF/addToFavourite");
             builder.Query = "id=" + announcementId;
-            HttpResponseMessage response = client.PostAsync(builder.Uri.ToString(),null).Result;
-            return RedirectToAction("singleProperty","AppUser",new { @announcementId = announcementId });
+            HttpResponseMessage response = client.PostAsync(builder.Uri.ToString(), null).Result;
+            return RedirectToAction("singleProperty", "AppUser", new { @announcementId = announcementId });
         }
         public ActionResult deleteFromFavourite(int announcementId)
         {
@@ -385,7 +386,47 @@ namespace PIDEV_FRONTEND.Controllers
 
 
 
-}
+
+
+        // adding Furniture
+        public async System.Threading.Tasks.Task<ActionResult> AddFurnitureAsync(string furnitureName, string fabricator, double shippingPrice)
+        {
+            Furniture furn = new Furniture();
+            furn.furnitureName = furnitureName;
+            furn.fabricator = fabricator;
+            furn.shippingPrice = shippingPrice;
+
+
+            HttpClient client = new HttpClient();
+            client.BaseAddress = new Uri("http://localhost:8081");
+            string jwtEncodedString = Request.Cookies["Token"].Value;
+            Debug.WriteLine(jwtEncodedString);
+            // var token = new JwtSecurityToken(jwtEncodedString: jwtEncodedString);
+
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", jwtEncodedString);
+            HttpResponseMessage response = await client.PostAsJsonAsync<Furniture>("api/addFurniture", furn).ContinueWith((postTask) => postTask.Result);
+            if (response.IsSuccessStatusCode)
+            {
+                ViewBag.status = response.StatusCode;
+                ViewBag.auth = client.DefaultRequestHeaders.Authorization;
+            }
+            else
+            {
+                ViewBag.status = response.StatusCode;
+                ViewBag.auth = client.DefaultRequestHeaders.Authorization;
+                Debug.WriteLine(response.ToString());
+                Debug.WriteLine(client.DefaultRequestHeaders.Authorization);
+                Debug.WriteLine(furnitureName);
+                Debug.WriteLine(fabricator);
+                Debug.WriteLine(shippingPrice);
+            }
+            return View("home");
+        }
+    
+
+
+
+    }
     }
 
    
