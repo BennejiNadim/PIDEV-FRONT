@@ -8,15 +8,15 @@ namespace PIDEV_FRONTEND.Models
     public class Furniture
     {
 
-      //  public int id { get; set; }
-        private String furniturename { get; set; }
-        private String fabricator { get; set; }
-        private String category { get; set; }
-        private double shippingPrice { get; set; }
-        private int numberOfPieces { get; set; }
-        private double FurniturePrice { get; set; }
-        private Boolean verified { get; set; }
-        private Boolean active { get; set; }
+        public int furnitureId { get; set; }
+        public String furnitureName { get; set; }
+        public String fabricator { get; set; }
+        public String category { get; set; }
+        public double shippingPrice { get; set; }
+        public int numberOfPieces { get; set; }
+        public double FurniturePrice { get; set; }
+        public Boolean verified { get; set; }
+        public Boolean active { get; set; }
 
     }
 }

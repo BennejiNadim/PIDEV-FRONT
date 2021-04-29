@@ -13,57 +13,41 @@ namespace PIDEV_FRONTEND.Controllers
     public class FurnitureController : Controller
     {
 
-
-
-        // GET: AppUser
-        public ActionResult Index()
+        string Baseurl = "http://localhost:8081/";
+        
+        public async Task<ActionResult> Index()
         {
-            HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri("http://localhost:8081");
-            client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-            HttpResponseMessage response = client.GetAsync("api/getallFurniture").Result;
-               
-             List<Furniture> furn = new List<Furniture>();
-
-          
-            if (response.IsSuccessStatusCode)
+            List<Furniture> furnitures = new List<Furniture>();
+            using (var client = new HttpClient())
             {
-                list = response.Content.ReadAsAsync<List<Furniture>>().Result;
+
+                client.BaseAddress = new Uri(Baseurl);
+
+                client.DefaultRequestHeaders.Clear();
+
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+
+                HttpResponseMessage Res = await client.GetAsync("api/getallFurniture");
+
+
+                if (Res.IsSuccessStatusCode)
+                {
+
+                    var result = Res.Content.ReadAsAsync<IEnumerable<Furniture>>().Result;
+
+                    furnitures = result.ToList();
+                }
+
+                return View(furnitures);
             }
-            else
-            {
-                //                ViewBag.result = "error";
-                list = null;
-            }
-           
-            return View(furn);
         }
-
-        // GET: AppUser/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        // GET: AppUser/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-
-
-
-
-
-
-
-
-
 
 
     }
 
-}
+    }
+
+
        
 
