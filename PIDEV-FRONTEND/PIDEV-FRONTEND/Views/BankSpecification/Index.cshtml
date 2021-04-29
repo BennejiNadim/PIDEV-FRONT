@@ -1,0 +1,127 @@
+﻿@model IEnumerable<PIDEV_FRONTEND.Models.BankSpecification>
+
+@{
+    ViewBag.Title = "Bank Specification";
+}
+
+<div class="clearfix"></div>
+<!-- ============================================================== -->
+<!-- Top header  -->
+<!-- ============================================================== -->
+<!-- ============================ Page Title Start================================== -->
+<div class="page-title">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12">
+
+                <h2 class="ipt-title">Bank Specifications</h2>
+                <span class="ipn-subtitle">See Our Latest Articles & News</span>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ============================ Page Title End ================================== -->
+<!-- ============================ Agency List Start ================================== -->
+<section class="gray-simple">
+
+    <div class="container">
+
+        <div class="row">
+            <div class="col text-center">
+                <div class="sec-heading center">
+                    @Html.ActionLink("Create New", "Create", new { area = "" }, new { @class = "btn btn-theme", @type = "button" })
+                </div>
+            </div>
+        </div>
+
+        <!-- row Start -->
+        <div class="row">
+
+            <table class="table">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.bankName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.preferences)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.value)
+                    </th>
+                    <th></th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.bankName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.preferences)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.value)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.id }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.id })
+                        </td>
+                    </tr>
+                }
+
+            </table>
+
+        </div>
+        <!-- /row -->
+        <!-- Pagination -->
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <ul class="pagination p-center">
+                    <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Previous">
+                            <span class="ti-arrow-left"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                    </li>
+                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item active"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item"><a class="page-link" href="#">...</a></li>
+                    <li class="page-item"><a class="page-link" href="#">18</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Next">
+                            <span class="ti-arrow-right"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+<!-- ============================ Agency List End ================================== -->
+<!-- ============================ Call To Action ================================== -->
+<section class="theme-bg call-to-act-wrap">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+
+                <div class="call-to-act">
+                    <div class="call-to-act-head">
+                        <h3>Want to Become a Real Estate Agent?</h3>
+                        <span>We'll help you to grow your career and growth.</span>
+                    </div>
+                    <a href="#" class="btn btn-call-to-act">SignUp Today</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ============================ Call To Action End ================================== -->
+<!-- ============================ Footer Start ================================== -->
